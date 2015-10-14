@@ -23,6 +23,8 @@
 #include <vtkProperty.h>
 #include <vtkCamera.h>
 #include <vtkLine.h>
+#include <vtkTriangleFilter.h>
+#include <vtkSTLWriter.h>
 
 #define PI    3.141592653
 #define STEPS 100
@@ -218,6 +220,18 @@ int main(int, char *[]) {
   ruled->SetInputData(polydata);   // pick up the poly data to run filter
   ruled->SetResolution(RES,RES);
   ruled->SetRuledModeToResample(); // apply VTK ruled surface wizardry
+
+  // write out a STL file
+  //   run a triangle filter on the ruled surface to create polys
+  vtkSmartPointer<vtkTriangleFilter>
+    tris = vtkTriangleFilter::New();
+  tris->SetInputConnection(ruled->GetOutputPort());
+
+  vtkSmartPointer<vtkSTLWriter>
+    stlWriter = vtkSmartPointer<vtkSTLWriter>::New();
+  stlWriter->SetFileName("OloidRuled.stl");
+  stlWriter->SetInputConnection(tris->GetOutputPort());
+  stlWriter->Write();
 
   // now the usual VTK render and displey pipeline
 

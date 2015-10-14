@@ -22,6 +22,7 @@
 #include <vtkPolyDataMapper.h>
 #include <vtkProperty.h>
 #include <vtkCamera.h>
+#include <vtkTriangleFilter.h>
 #include <vtkSTLWriter.h>
 
 #define PI         3.141592653
@@ -204,11 +205,15 @@ int main(int, char *[]) {
   polydata->SetStrips(cells);
 
   // write out a STL file
+  //   run a triangle filter on the mesh to create polys
+  vtkSmartPointer<vtkTriangleFilter>
+    tris = vtkTriangleFilter::New();
+  tris->SetInputData(polydata);
 
   vtkSmartPointer<vtkSTLWriter>
     stlWriter = vtkSmartPointer<vtkSTLWriter>::New();
   stlWriter->SetFileName("OloidTri.stl");
-  stlWriter->SetInputData(polydata);
+  stlWriter->SetInputConnection(tris->GetOutputPort());
   stlWriter->Write();
 
   // now the usual VTK render and displey pipeline
