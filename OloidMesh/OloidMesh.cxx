@@ -30,7 +30,7 @@
 #include <vtkSTLWriter.h>                 // physical realisation
 
 #define PI   4*atan(1)
-#define VMAX 401                          // maximum vertex index
+#define VMAX 400                          // maximum vertex index
 
 #define RADIUS 25.4                       // imperious :)
 
@@ -84,24 +84,24 @@ int main(int, char *[]) {
 
     // s increasing, t increasing
     for( vtkIdType s=0; s<=VMAX/2; s++ ) {
-      strip[j++] = s;
       strip[j++] = t++;
+      strip[j++] = s;
     }
     t--;  // hit N, post inc to N+1 so rewind to N again
     // s increasing, t decreasing
     for( vtkIdType s=VMAX/2+1; s<=VMAX; s++ ) {
-      strip[j++] = s;
       strip[j++] = --t;
+      strip[j++] = s;
     }
     // s decreasing, t decreasing
     for( vtkIdType s=VMAX-1; s>=VMAX/2; s-- ) {
-      strip[j++] = s;
       strip[j++] = --t;
+      strip[j++] = s;
     }
     // s decreasing, t increasing
     for( vtkIdType s=VMAX/2-1; s>=0; s-- ) {
-      strip[j++] = s;
       strip[j++] = ++t;
+      strip[j++] = s;
     }
 
   } else { // even vertices, odd steps
@@ -110,8 +110,8 @@ int main(int, char *[]) {
 
     // s increasing, t increasing
     for( vtkIdType s=0; s<=(VMAX+1)/2-1; s++ ) {
-      strip[j++] = s;
       strip[j++] = t++;
+      strip[j++] = s;
     }
     strip[j++] = (VMAX+1)/2;
     t--;  // hit N, post inc to N+1 so rewind to N again
@@ -123,8 +123,8 @@ int main(int, char *[]) {
     strip[j++] = --t;
     // s decreasing, t decreasing
     for( vtkIdType s=VMAX-1; s>=(VMAX+1)/2; s-- ) {
-      strip[j++] = s;
       strip[j++] = --t;
+      strip[j++] = s;
     }
     strip[j++] = (VMAX+1)/2-1;
     // s decreasing, t increasing
@@ -140,9 +140,9 @@ int main(int, char *[]) {
     cells = vtkSmartPointer<vtkCellArray>::New();
   cells->InsertNextCell(j, strip);
 
-  //for( vtkIdType s=0; s<j; s++ ) {
-  //  std::cout << s << " : " << strip[s] << std::endl;
-  //}
+//  for( vtkIdType s=0; s<j; s++ ) {
+//    std::cout << s << " : " << strip[s] << std::endl;
+//  }
 
   vtkSmartPointer<vtkPolyData>
     polydata = vtkSmartPointer<vtkPolyData>::New();
