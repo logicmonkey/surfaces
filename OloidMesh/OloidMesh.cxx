@@ -30,7 +30,7 @@
 #include <vtkSTLWriter.h>                 // physical realisation
 
 #define PI   4*atan(1)
-#define VMAX 400                          // maximum vertex index
+#define VMAX 64                             // maximum vertex index
 
 #define RADIUS 25.4                       // imperious :)
 
@@ -75,8 +75,10 @@ int main(int, char *[]) {
   // each quarter. the even case has an extra triangle to be added
   // in order to fill a hole when adding vertices to the strip in pairs
 
-  vtkIdType strip[4*VMAX+2];
   int j = 0;
+  //vtkIdType strip[4*VMAX+2];     // VMAX even
+  //vtkIdType strip[4*(VMAX+1)+2]; // VMAX odd
+  vtkIdType strip[4*(VMAX+VMAX%2)+2];
 
   if( VMAX%2 == 0 ) { // odd vertices (VMAX+1), even steps
 
@@ -113,27 +115,23 @@ int main(int, char *[]) {
       strip[j++] = t++;
       strip[j++] = s;
     }
-    strip[j++] = (VMAX+1)/2;
-    t--;  // hit N, post inc to N+1 so rewind to N again
     // s increasing, t decreasing
-    for( vtkIdType s=(VMAX+1)/2+1; s<=VMAX; s++ ) {
-      strip[j++] = s;
+    for( vtkIdType s=(VMAX+1)/2; s<=VMAX; s++ ) {
       strip[j++] = --t;
+      strip[j++] = s;
     }
-    strip[j++] = --t;
     // s decreasing, t decreasing
-    for( vtkIdType s=VMAX-1; s>=(VMAX+1)/2; s-- ) {
+    for( vtkIdType s=VMAX; s>=(VMAX+1)/2; s-- ) {
       strip[j++] = --t;
       strip[j++] = s;
     }
-    strip[j++] = (VMAX+1)/2-1;
-    // s decreasing, t increasing
-    for( vtkIdType s=(VMAX+1)/2-2; s>=0; s-- ) {
-      strip[j++] = s;
+    t--;
+    for( vtkIdType s=(VMAX+1)/2-1; s>=0; s-- ) {
       strip[j++] = ++t;
+      strip[j++] = s;
     }
-    strip[j++] = ++t;
-
+    strip[j++] = ++t; // final closing triangle
+    strip[j++] = 0;
   }
 
   vtkSmartPointer<vtkCellArray>
