@@ -27,8 +27,10 @@
 #include <vtkSTLWriter.h>
 
 #define PI    3.141592653
-#define STEPS 100
+#define STEPS 10
 #define RES   25
+
+#define RADIUS 25.0
 
 int main(int, char *[]) {
 
@@ -56,11 +58,11 @@ int main(int, char *[]) {
   double ht = PI;              // Pi decreasing to Pi/3
   double vt = 2.0f/3.0f * PI;  // 2/3 Pi decreasing to 0
 
-  hx = cos(ht);
-  hy = sin(ht);
+  hx = RADIUS * (cos(ht) - 0.5);
+  hy = RADIUS * sin(ht);
 
-  vx = 1.0f + cos(vt);
-  vz = sin(vt);
+  vx = RADIUS * (cos(vt) + 0.5);
+  vz = RADIUS * sin(vt);
 
   int n = 0;
 
@@ -72,11 +74,11 @@ int main(int, char *[]) {
     ht -= sub_arc_length;
     vt -= sub_arc_length;
 
-    hx = cos(ht);
-    hy = sin(ht);
+    hx = RADIUS * (cos(ht) - 0.5);
+    hy = RADIUS * sin(ht);
 
-    vx = 1.0f + cos(vt);
-    vz = sin(vt);
+    vx = RADIUS * (cos(vt) + 0.5);
+    vz = RADIUS * sin(vt);
 
     points->InsertPoint(n, hx, hy, 0);
     points->InsertPoint(n+1, vx, 0, vz);
@@ -98,11 +100,11 @@ int main(int, char *[]) {
   ht = -PI;             // -Pi increasing to -Pi/3
   vt = 2.0f/3.0f * PI;  // 2/3 Pi decreasing to 0
 
-  hx = cos(ht);
-  hy = sin(ht);
+  hx = RADIUS * (cos(ht) - 0.5);
+  hy = RADIUS * sin(ht);
 
-  vx = 1.0f + cos(vt);
-  vz = sin(vt);
+  vx = RADIUS * (cos(vt) + 0.5);
+  vz = RADIUS * sin(vt);
 
   points->InsertPoint(n++, hx, hy, 0);
   points->InsertPoint(n++, vx, 0, vz);
@@ -112,11 +114,11 @@ int main(int, char *[]) {
     ht += sub_arc_length;
     vt -= sub_arc_length;
 
-    hx = cos(ht);
-    hy = sin(ht);
+    hx = RADIUS * (cos(ht) - 0.5);
+    hy = RADIUS * sin(ht);
 
-    vx = 1.0f + cos(vt);
-    vz = sin(vt);
+    vx = RADIUS * (cos(vt) + 0.5);
+    vz = RADIUS * sin(vt);
 
     points->InsertPoint(n, hx, hy, 0);
     points->InsertPoint(n+1, vx, 0, vz);
@@ -138,11 +140,11 @@ int main(int, char *[]) {
   ht = PI;              // Pi decreasing to Pi/3
   vt = -2.0f/3.0f * PI; // -2/3 Pi increasing to 0
 
-  hx = cos(ht);
-  hy = sin(ht);
+  hx = RADIUS * (cos(ht) - 0.5);
+  hy = RADIUS * sin(ht);
 
-  vx = 1.0f + cos(vt);
-  vz = sin(vt);
+  vx = RADIUS * (cos(vt) + 0.5);
+  vz = RADIUS * sin(vt);
 
   points->InsertPoint(n++, hx, hy, 0);
   points->InsertPoint(n++, vx, 0, vz);
@@ -152,11 +154,11 @@ int main(int, char *[]) {
     ht -= sub_arc_length;
     vt += sub_arc_length;
 
-    hx = cos(ht);
-    hy = sin(ht);
+    hx = RADIUS * (cos(ht) - 0.5);
+    hy = RADIUS * sin(ht);
 
-    vx = 1.0f + cos(vt);
-    vz = sin(vt);
+    vx = RADIUS * (cos(vt) + 0.5);
+    vz = RADIUS * sin(vt);
 
     points->InsertPoint(n, hx, hy, 0);
     points->InsertPoint(n+1, vx, 0, vz);
@@ -178,11 +180,11 @@ int main(int, char *[]) {
   ht = -PI;             // -Pi increasing to -Pi/3
   vt = -2.0f/3.0f * PI; // -2/3 Pi increasing to 0
 
-  hx = cos(ht);
-  hy = sin(ht);
+  hx = RADIUS * (cos(ht) - 0.5);
+  hy = RADIUS * sin(ht);
 
-  vx = 1.0f + cos(vt);
-  vz = sin(vt);
+  vx = RADIUS * (cos(vt) + 0.5);
+  vz = RADIUS * sin(vt);
 
   points->InsertPoint(n++, hx, hy, 0);
   points->InsertPoint(n++, vx, 0, vz);
@@ -192,11 +194,11 @@ int main(int, char *[]) {
     ht += sub_arc_length;
     vt += sub_arc_length;
 
-    hx = cos(ht);
-    hy = sin(ht);
+    hx = RADIUS * (cos(ht) - 0.5);
+    hy = RADIUS * sin(ht);
 
-    vx = 1.0f + cos(vt);
-    vz = sin(vt);
+    vx = RADIUS * (cos(vt) + 0.5);
+    vz = RADIUS * sin(vt);
 
     points->InsertPoint(n, hx, hy, 0);
     points->InsertPoint(n+1, vx, 0, vz);
