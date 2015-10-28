@@ -1,13 +1,42 @@
+
 //
-// Oloid - a ruled surface (a developable) based on two unit circles.
+//   Copyright (C) 2015 by Piers Barber
+//
+//   This program is free software; you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation; either version 2 of the License, or
+//   (at your option) any later version.
+//
+//   This program is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public License
+//   along with this program; if not, write to the
+//   Free Software Foundation, Inc.,
+//   51 Franklin Street, Fifth Floor,Boston, MA 02110-1301 USA
+//
+// -----------------------------------------------------------------------
+//
+// Oloid - a ruled surface based on two unit circles.
 //   One circle is in the xy plane and centred at (0,0,0) the other
-//   is centred at (1,0,0) in the xz plane. At least, that would be
-//   the case, but I shift everything left by 0.5 to position the
-//   centre of mass at O.
+//   is centred at (1,0,0) in the xz plane. The ruled surface is swept
+//   out by a straight line from one circle to the other, over the arc
+//   with range -2*pi/3 to 2*pi/3. The mid point of each arc connects
+//   to the end points of the arc of the corresponding circle.
 //
-//   This implementation generates all the required vertices on each
-//   circle up front (geometry phase) and then stitches them together
-//   into a single strip that closes on itself (toplology phase).
+//   This implementation calculates all the required triangle mesh vertices
+//   on each arc up front (geometry stage) and then stitches them together
+//   into a single strip that closes on itself (toplology stage).
+//   The triangle strip is generated in four phases as contiguous
+//   sub-strips each with a turning point at the end of one arc. Vertices
+//   are re-used between phases in order to ensure there are no holes.
+//   The triangle mesh is created 2 triangles at at time by adding 2
+//   vertices to an initial pair. A slightly different mesh structure
+//   comes from using an odd or even vertex count. The odd or even
+//   approaches are separated for readability.
+//   The resulting structure is well behaved and suitable for 3D printing.
 //
 //                                                 -=:LogicMonkey:=-
 
@@ -30,7 +59,7 @@
 #include <vtkSTLWriter.h>                 // physical realisation
 
 #define PI   4*atan(1)
-#define VMAX 64                             // maximum vertex index
+#define VMAX 400                          // maximum vertex index
 
 #define RADIUS 25.4                       // imperious :)
 
@@ -138,9 +167,11 @@ int main(int, char *[]) {
     cells = vtkSmartPointer<vtkCellArray>::New();
   cells->InsertNextCell(j, strip);
 
-//  for( vtkIdType s=0; s<j; s++ ) {
-//    std::cout << s << " : " << strip[s] << std::endl;
-//  }
+#ifdef DEBUG
+  for( vtkIdType s=0; s<j; s++ ) {
+    std::cout << s << " : " << strip[s] << std::endl;
+  }
+#endif
 
   vtkSmartPointer<vtkPolyData>
     polydata = vtkSmartPointer<vtkPolyData>::New();
