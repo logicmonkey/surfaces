@@ -19,7 +19,10 @@
 //
 // -----------------------------------------------------------------------
 //
-// Oloid - a ruled surface based on two unit circles.
+// Foloid* - a ruled surface based on two unit circles.
+//
+//   THIS IS NOT AN OLOID
+//
 //   One circle is in the xy plane and centred at (0,0,0) the other
 //   is centred at (1,0,0) in the xz plane. The ruled surface is swept
 //   out by a straight line from one circle to the other, over the arc
@@ -37,6 +40,8 @@
 //   comes from using an odd or even vertex count. The odd or even
 //   approaches are separated for readability.
 //   The resulting structure is well behaved and suitable for 3D printing.
+//
+//   * Fool's Oloid
 //
 //                                                 -=:LogicMonkey:=-
 
@@ -59,7 +64,7 @@
 #include <vtkSTLWriter.h>                 // physical realisation
 
 #define PI   4*atan(1)
-#define VMAX 400                          // maximum vertex index
+#define VMAX 600                          // maximum vertex index
 
 #define RADIUS 25.4                       // imperious :)
 

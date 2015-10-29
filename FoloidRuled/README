@@ -1,2 +1,2 @@
-OloidRuled uses the VTK ruled surface filter. It's visually nice but the
-underlying connectivity is not as clean as in the OloidMesh implementation
+FoloidRuled uses the VTK ruled surface filter. It's visually nice but the
+underlying connectivity is not as clean as in the FoloidMesh implementation

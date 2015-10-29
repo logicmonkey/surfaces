@@ -1,11 +1,15 @@
 //
-// Oloid - a ruled surface (a developable) based on two unit circles.
+// Foloid* - a ruled surface (a developable) based on two unit circles.
+//
+//   THIS IS NOT AN OLOID
+//
 //   One circle is in the xy plane and centred at (0,0,0) the other
 //   is centred at (1,0,0) in the xz plane. The ruled surface is
 //   developed systematically in 4 phases, starting at the x axis
 //   of the xy circle with straight lines traced to the other circle.
 //   100 STEPS are taken over 2/3rds of a half circle in each phase.
 //
+// * Fool's Oloid
 //                                                 -=:LogicMonkey:=-
 
 #include <vtkVersion.h>
