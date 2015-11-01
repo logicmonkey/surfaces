@@ -1,4 +1,3 @@
-
 //
 //   Copyright (C) 2015 by Piers Barber
 //
@@ -19,7 +18,7 @@
 //
 // -----------------------------------------------------------------------
 //
-// Foloid* - a ruled surface based on two unit circles.
+// Fauxloid* - a ruled surface based on two unit circles.
 //
 //   THIS IS NOT AN OLOID
 //
@@ -41,7 +40,7 @@
 //   approaches are separated for readability.
 //   The resulting structure is well behaved and suitable for 3D printing.
 //
-//   * Fool's Oloid
+//   * Fool's Oloid or Fauxloid
 //
 //                                                 -=:LogicMonkey:=-
 

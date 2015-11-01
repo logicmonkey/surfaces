@@ -1,5 +1,5 @@
 //
-// Foloid* - a ruled surface (a developable) based on two unit circles.
+// Fauxloid* - a ruled surface (a developable) based on two unit circles.
 //
 //   THIS IS NOT AN OLOID
 //
@@ -9,7 +9,7 @@
 //   of the xy circle with straight lines traced to the other circle.
 //   100 STEPS are taken over 2/3rds of a half circle in each phase.
 //
-// * Fool's Oloid
+// * Fool's Oloid or Fauxloid
 //                                                 -=:LogicMonkey:=-
 
 #include <vtkVersion.h>
