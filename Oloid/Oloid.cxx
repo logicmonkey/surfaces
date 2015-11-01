@@ -59,8 +59,7 @@
 
 #define PI 4.0*atan(1)                    // pi for this computer
 
-#define UMAX 8
-
+#define UMAX 128
 
 #define RADIUS 25.4                       // imperious :)
 
@@ -133,40 +132,62 @@ int main(int, char *[]) {
   // each quarter. the even case has an extra triangle to be added
   // in order to fill a hole when adding vertices to the strip in pairs
 
+  vtkIdType strip1[UMAX+2];
+  vtkIdType strip2[UMAX+2];
+  vtkIdType strip3[UMAX+2];
+  vtkIdType strip4[UMAX+2];
+
   int strip_idx = 0;
-  vtkIdType strip[4*UMAX+2];     // MAX even
+  vtkIdType v = VMID; // VMID to VMAX
 
-  vtkIdType v = VMID;
-
-  // u increasing, v increasing
   for( vtkIdType u=UMIN; u<=UMID; u++ ) {
-    strip[strip_idx++] = v++;
-    strip[strip_idx++] = u;
+    strip1[strip_idx++] = v++;
+    strip1[strip_idx++] = u;
   }
-  v--;
-  // u increasing, v decreasing
-  for( vtkIdType u=UMID+1; u<=UMAX; u++ ) {
-    strip[strip_idx++] = --v;
-    strip[strip_idx++] = u;
+
+  strip_idx = 0;
+  v = VMIN;           // VMIN to VMID
+
+  for( vtkIdType u=UMID; u>=UMIN; u-- ) {
+    strip2[strip_idx++] = u;
+    strip2[strip_idx++] = v++;
   }
-  // u decreasing, v decreasing
-  for( vtkIdType u=UMAX-1; u>=UMID; u-- ) {
-    strip[strip_idx++] = --v;
-    strip[strip_idx++] = u;
+
+  strip_idx = 0;
+  v = VMID;           // VMID to VMAX
+
+  for( vtkIdType u=UMAX; u>=UMID; u-- ) {
+    strip3[strip_idx++] = v++;
+    strip3[strip_idx++] = u;
   }
-  // u decreasing, v increasing
-  for( vtkIdType u=UMID-1; u>=UMIN; u-- ) {
-    strip[strip_idx++] = ++v;
-    strip[strip_idx++] = u;
+
+  strip_idx = 0;
+  v = VMIN;           // VMIN to VMID
+
+  for( vtkIdType u=UMID; u<=UMAX; u++ ) {
+    strip4[strip_idx++] = u;
+    strip4[strip_idx++] = v++;
   }
 
   vtkSmartPointer<vtkCellArray>
     cells = vtkSmartPointer<vtkCellArray>::New();
-  cells->InsertNextCell(strip_idx, strip);
+  cells->InsertNextCell( UMAX+2, strip1 );
+  cells->InsertNextCell( UMAX+2, strip2 );
+  cells->InsertNextCell( UMAX+2, strip3 );
+  cells->InsertNextCell( UMAX+2, strip4 );
 
   std::cout << "TOPOLOGY" << std::endl;
-  for( vtkIdType s=0; s<strip_idx; s+=2 ) {
-    std::cout << s << " : " << strip[s] << " : " << strip[s+1] << std::endl;
+  for( vtkIdType s=0; s<UMAX+2; s+=2 ) {
+    std::cout << s << " : " << strip1[s] << " : " << strip1[s+1] << std::endl;
+  }
+  for( vtkIdType s=0; s<UMAX+2; s+=2 ) {
+    std::cout << s << " : " << strip2[s] << " : " << strip2[s+1] << std::endl;
+  }
+  for( vtkIdType s=0; s<UMAX+2; s+=2 ) {
+    std::cout << s << " : " << strip3[s] << " : " << strip3[s+1] << std::endl;
+  }
+  for( vtkIdType s=0; s<UMAX+2; s+=2 ) {
+    std::cout << s << " : " << strip4[s] << " : " << strip4[s+1] << std::endl;
   }
 
   vtkSmartPointer<vtkPolyData>
