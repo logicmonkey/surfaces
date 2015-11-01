@@ -59,7 +59,7 @@
 
 #define PI 4.0*atan(1)                    // pi for this computer
 
-#define UMAX 6
+#define UMAX 8
 
 
 #define RADIUS 25.4                       // imperious :)
@@ -81,6 +81,8 @@ int main(int, char *[]) {
 
   double dt = 4.0/3.0 * PI / UMAX;
   double t = -2.0/3.0 * PI;
+
+  std::cout << "GEOMETRY" << std::endl;
 
   for( vtkIdType i=UMIN; i<=UMAX; i++ ) {
 
@@ -131,40 +133,41 @@ int main(int, char *[]) {
   // each quarter. the even case has an extra triangle to be added
   // in order to fill a hole when adding vertices to the strip in pairs
 
-  int j = 0;
+  int strip_idx = 0;
   vtkIdType strip[4*UMAX+2];     // MAX even
 
   vtkIdType v = VMID;
 
   // u increasing, v increasing
   for( vtkIdType u=UMIN; u<=UMID; u++ ) {
-    strip[j++] = v++;
-    strip[j++] = u;
+    strip[strip_idx++] = v++;
+    strip[strip_idx++] = u;
   }
   v--;
   // u increasing, v decreasing
   for( vtkIdType u=UMID+1; u<=UMAX; u++ ) {
-    strip[j++] = --v;
-    strip[j++] = u;
+    strip[strip_idx++] = --v;
+    strip[strip_idx++] = u;
   }
   // u decreasing, v decreasing
   for( vtkIdType u=UMAX-1; u>=UMID; u-- ) {
-    strip[j++] = --v;
-    strip[j++] = u;
+    strip[strip_idx++] = --v;
+    strip[strip_idx++] = u;
   }
   // u decreasing, v increasing
   for( vtkIdType u=UMID-1; u>=UMIN; u-- ) {
-    strip[j++] = ++v;
-    strip[j++] = u;
+    strip[strip_idx++] = ++v;
+    strip[strip_idx++] = u;
   }
 
   vtkSmartPointer<vtkCellArray>
     cells = vtkSmartPointer<vtkCellArray>::New();
-  cells->InsertNextCell(j, strip);
+  cells->InsertNextCell(strip_idx, strip);
 
-//  for( vtkIdType s=0; s<j; s++ ) {
-//    std::cout << s << " : " << strip[s] << std::endl;
-//  }
+  std::cout << "TOPOLOGY" << std::endl;
+  for( vtkIdType s=0; s<strip_idx; s+=2 ) {
+    std::cout << s << " : " << strip[s] << " : " << strip[s+1] << std::endl;
+  }
 
   vtkSmartPointer<vtkPolyData>
     polydata = vtkSmartPointer<vtkPolyData>::New();
