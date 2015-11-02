@@ -22,8 +22,27 @@
 //   One circle is in the xy plane and centred at (0,0,0) the other
 //   is centred at (1,0,0) in the xz plane. The ruled surface is swept
 //   out by a straight line from one circle to the other, over the arc
-//   with range -2*pi/3 to 2*pi/3. The mid point of each arc connects
-//   to the end points of the arc of the corresponding circle.
+//   with range -2*pi/3 to 2*pi/3. I refer to the circles as U and V.
+//
+//   The two circles are parametrized differently. U has the usual one
+//   (cos t, sin t) with constant angular velocity. V has a variable
+//   angular velocity parametrization in the xz plane:
+//
+//    .                                   .
+//   |   cos t            sqrt(1 + 2cos t) |
+//   | --------- , 0, +/- ---------------- |
+//   | 1 + cos t              1 + cos t    |
+//    .                                   .
+//
+//   This is real over a restricted range and has obvious singularities.
+//
+//   Using a naive 1:1 parametrization between circles will yield a
+//   concave surface. This mapping gives the correct and remarkable
+//   Oloid property where every surface point contacts the plane when
+//   the object is rolled over it.
+//
+//   See the excellent Dirnbock & Stachel [1997]:
+//     http://www.heldermann-verlag.de/jgg/jgg01_05/jgg0113.pdf
 //
 //   This implementation calculates all the required triangle mesh vertices
 //   on each arc up front (geometry stage) and then stitches them together
@@ -32,10 +51,7 @@
 //   sub-strips each with a turning point at the end of one arc. Vertices
 //   are re-used between phases in order to ensure there are no holes.
 //   The triangle mesh is created 2 triangles at at time by adding 2
-//   vertices to an initial pair. A slightly different mesh structure
-//   comes from using an odd or even vertex count. The odd or even
-//   approaches are separated for readability.
-//   The resulting structure is well behaved and suitable for 3D printing.
+//   vertices to an initial pair.
 //
 //                                                 -=:LogicMonkey:=-
 
@@ -59,7 +75,7 @@
 
 #define PI 4.0*atan(1)                    // pi for this computer
 
-#define UMAX 128
+#define UMAX 256
 
 #define RADIUS 25.4                       // imperious :)
 
@@ -127,67 +143,48 @@ int main(int, char *[]) {
 
   // TOPOLOGY PHASE (create point interconnect: tri strip)
 
-  // separate the two stitching mechanisms for readability
-  // the odd vertices case needs no special handling at the end of
-  // each quarter. the even case has an extra triangle to be added
-  // in order to fill a hole when adding vertices to the strip in pairs
+  // Run the triangulation process over 4 sub-strips. This is the simplest
+  // way to do it without incurring artefacts at the turning points as
+  // a result of vertex sharing (local vertex fans)
 
-  vtkIdType strip1[UMAX+2];
-  vtkIdType strip2[UMAX+2];
-  vtkIdType strip3[UMAX+2];
-  vtkIdType strip4[UMAX+2];
-
+  vtkIdType strip[4*(UMAX+2)];
   int strip_idx = 0;
+
   vtkIdType v = VMID; // VMID to VMAX
 
   for( vtkIdType u=UMIN; u<=UMID; u++ ) {
-    strip1[strip_idx++] = v++;
-    strip1[strip_idx++] = u;
+    strip[strip_idx++] = v++;
+    strip[strip_idx++] = u;
   }
 
-  strip_idx = 0;
   v = VMIN;           // VMIN to VMID
 
   for( vtkIdType u=UMID; u>=UMIN; u-- ) {
-    strip2[strip_idx++] = u;
-    strip2[strip_idx++] = v++;
+    strip[strip_idx++] = u;
+    strip[strip_idx++] = v++;
   }
 
-  strip_idx = 0;
   v = VMID;           // VMID to VMAX
 
   for( vtkIdType u=UMAX; u>=UMID; u-- ) {
-    strip3[strip_idx++] = v++;
-    strip3[strip_idx++] = u;
+    strip[strip_idx++] = v++;
+    strip[strip_idx++] = u;
   }
 
-  strip_idx = 0;
   v = VMIN;           // VMIN to VMID
 
   for( vtkIdType u=UMID; u<=UMAX; u++ ) {
-    strip4[strip_idx++] = u;
-    strip4[strip_idx++] = v++;
+    strip[strip_idx++] = u;
+    strip[strip_idx++] = v++;
   }
 
   vtkSmartPointer<vtkCellArray>
     cells = vtkSmartPointer<vtkCellArray>::New();
-  cells->InsertNextCell( UMAX+2, strip1 );
-  cells->InsertNextCell( UMAX+2, strip2 );
-  cells->InsertNextCell( UMAX+2, strip3 );
-  cells->InsertNextCell( UMAX+2, strip4 );
+  cells->InsertNextCell( 4*(UMAX+2), strip );
 
   std::cout << "TOPOLOGY" << std::endl;
-  for( vtkIdType s=0; s<UMAX+2; s+=2 ) {
-    std::cout << s << " : " << strip1[s] << " : " << strip1[s+1] << std::endl;
-  }
-  for( vtkIdType s=0; s<UMAX+2; s+=2 ) {
-    std::cout << s << " : " << strip2[s] << " : " << strip2[s+1] << std::endl;
-  }
-  for( vtkIdType s=0; s<UMAX+2; s+=2 ) {
-    std::cout << s << " : " << strip3[s] << " : " << strip3[s+1] << std::endl;
-  }
-  for( vtkIdType s=0; s<UMAX+2; s+=2 ) {
-    std::cout << s << " : " << strip4[s] << " : " << strip4[s+1] << std::endl;
+  for( vtkIdType s=0; s<4*(UMAX+2); s+=2 ) {
+    std::cout << s << " : " << strip[s] << " : " << strip[s+1] << std::endl;
   }
 
   vtkSmartPointer<vtkPolyData>
