@@ -20,20 +20,36 @@
 //
 // rOloid - an Oloid using rational parametrization.
 //
+// I consider the definitive text on the Oloid to be Dirnbock and Stachel's
+// paper of 1997:
+//
+//     http://www.heldermann-verlag.de/jgg/jgg01_05/jgg0113.pdf
+//
+// In this software the following original alternative paramatrizaton
+// is presented:
+//
 //              ,                      .
 //             |   2t    -1   1-t^2     |
 //         U = | ----- ,  - - ----- , 0 |
 //             | 1+t^2    2   1+t^2     |
 //              '                      '
 //
-//              ,                             .
-//             |     sqrt(3 + 2t^2 -t^4)   t^2 |
-//         V = | 0 , ------------------- , --- |
-//             |             2              2  |
-//              '                             '
+//              ,                                  .
+//             |         sqrt((3-t^2)(1+t^2))   t^2 |
+//         V = | 0 , +/- -------------------- , --- |
+//             |                   2             2  |
+//              '                                  '
 //
-//    -sqrt(3) <= t <= sqrt(3)
-
+//         t:(-sqrt(3)..sqrt(3))
+//
+// This predominantly rational parametrization avoids the transcendental
+// functions and singularities exhibited by Dirnbock and Stachel's solution.
+//
+// Derivation of this implementation and that of D&S is here:
+//
+// link to my PDF
+//
+//                                                         -=:LogicMonkey:=-
 
 #include <vtkVersion.h>
 #include <vtkTransform.h>
@@ -93,7 +109,7 @@ int main(int, char *[]) {
 
   for( vtkIdType i=VMIN; i<=VMID-1; i++ ) {
 
-    p[0] = RADIUS * sqrt( 3.0 + 2.0 * t*t - t*t*t*t ) / 2.0;
+    p[0] = RADIUS * sqrt((3.0 - t*t)*(1.0 + t*t)) / 2.0;
     p[1] = RADIUS * t*t / 2.0;
 
     points->InsertNextPoint( 0, p[1], p[0] );
@@ -110,7 +126,7 @@ int main(int, char *[]) {
 
   for( vtkIdType i=VMID+1; i<=VMAX; i++ ) {
 
-    p[0] = RADIUS * sqrt( 3.0 + 2.0 * t*t - t*t*t*t ) / 2.0;
+    p[0] = RADIUS * sqrt((3.0 - t*t)*(1.0 + t*t)) / 2.0;
     p[1] = RADIUS * t*t / 2.0;
 
     points->InsertNextPoint( 0, p[1], -p[0] );
