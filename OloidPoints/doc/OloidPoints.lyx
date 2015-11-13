@@ -310,7 +310,7 @@ key "key-1"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-U\left(t\right)=\left[\sin\left(t\right),-\frac{1}{2}-\cos\left(t\right),0\right]
+U\left(t\right)=\left[\sin\left(t\right),-\frac{1}{2}-\cos\left(t\right),0\right]\label{eq:1}
 \end{equation}
 
 \end_inset
@@ -542,7 +542,7 @@ Rotating back into the yz plane it follows that V has the parametrization
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-V\left(t\right)=\left[0,\frac{1}{2}-\frac{\cos\left(t\right)}{1+\cos\left(t\right)},\pm\frac{\sqrt{1+2\cos\left(t\right)}}{1+\cos\left(t\right)}\right]
+V\left(t\right)=\left[0,\frac{1}{2}-\frac{\cos\left(t\right)}{1+\cos\left(t\right)},\pm\frac{\sqrt{1+2\cos\left(t\right)}}{1+\cos\left(t\right)}\right]\label{eq:2}
 \end{equation}
 
 \end_inset
@@ -570,7 +570,7 @@ reference "fig:3"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-U\left(t\right)=\left[\frac{2t}{1+t^{2}},-\frac{1}{2}-\frac{1-t^{2}}{1+t^{2}},0\right]
+U\left(t\right)=\left[\frac{2t}{1+t^{2}},-\frac{1}{2}-\frac{1-t^{2}}{1+t^{2}},0\right]\label{eq:3}
 \end{equation}
 
 \end_inset
@@ -628,10 +628,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
@@ -649,10 +645,6 @@ status open
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -681,10 +673,6 @@ name "fig:3"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -698,7 +686,7 @@ It follows that
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-V\left(t\right)=\left[0,\pm\frac{1}{2}\sqrt{\left(3-t^{2}\right)\left(1+t^{2}\right)},\frac{t^{2}}{2}\right]
+V\left(t\right)=\left[0,\pm\frac{1}{2}\sqrt{\left(3-t^{2}\right)\left(1+t^{2}\right)},\frac{t^{2}}{2}\right]\label{eq:4}
 \end{equation}
 
 \end_inset
@@ -748,12 +736,47 @@ on have much the same subjective quality.
 \end_layout
 
 \begin_layout Standard
-Good luck to anyone proving that 
+The property 
 \begin_inset Formula $|UV|=\sqrt{3}$
 \end_inset
 
- using my equations.
- I don't think it will be pretty.
+ is readily proven using equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:2"
+
+\end_inset
+
+ as in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+
+\end_inset
+
+.
+ Demonstrating the same with equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:3"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:4"
+
+\end_inset
+
+ has so far eluded the author.
 \end_layout
 
 \begin_layout Standard
