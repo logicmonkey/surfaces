@@ -1,0 +1,866 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Parametric Equations of the Oloid
+\end_layout
+
+\begin_layout Author
+logicmonkey
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+The Oloid is a developable or torse or ruled surface.
+ It is based upon joining the points between two identical circles, perpendicula
+r to one another in space and separated such that each has its centre lying
+ on the circumference of the other.
+ Points on one circle are then joined to points on the other with a straight
+ line - hence a 
+\begin_inset Quotes eld
+\end_inset
+
+ruled surface
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The parametrization of the unit circle in the plane and centred at the origin
+ is typically given as (
+\begin_inset Formula $\sin\left(t\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\cos\left(t\right)$
+\end_inset
+
+) over 
+\begin_inset Formula $t$
+\end_inset
+
+∈
+\begin_inset Formula $[-\pi,\pi)$
+\end_inset
+
+.
+ This is a good basis for the parametrization of one of the circles, but
+ not for the other.
+ As will be demonstrated, for the remarkable properties of the Oloid to
+ be realised, the mapping of a point on one circle to its corresponding
+ straight line end point on the other circle requires the arc of the end
+ point to have a different parametrization to that of the start.
+ Implementations that assume a naive connection of points typically exhibit
+ concave surfaces and are not Oloids.
+ I call such surfaces Fauxloids.
+\end_layout
+
+\begin_layout Standard
+A derivation is given for the equations provided in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+
+\end_inset
+
+.
+ A further alternative parametrization with a rational goal is also shown.
+\end_layout
+
+\begin_layout Section*
+Inversion with Respect to a Circle
+\end_layout
+
+\begin_layout Standard
+Point 
+\begin_inset Formula $A$
+\end_inset
+
+ on the unit circle centred at the origin 
+\begin_inset Formula $O$
+\end_inset
+
+ lies on the tangent line that crosses the x-axis at point 
+\begin_inset Formula $P$
+\end_inset
+
+ as shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:1"
+
+\end_inset
+
+.
+ The point 
+\begin_inset Formula $P'$
+\end_inset
+
+ is the 
+\shape italic
+inverse
+\shape default
+ of 
+\begin_inset Formula $P$
+\end_inset
+
+ with respect to the circle.
+ Similarly, 
+\begin_inset Formula $P$
+\end_inset
+
+ is the inverse of 
+\begin_inset Formula $P'$
+\end_inset
+
+.
+ If the x coordinate of 
+\begin_inset Formula $P'$
+\end_inset
+
+ is 
+\begin_inset Formula $\cos\left(t\right)$
+\end_inset
+
+, then the x coordinate of 
+\begin_inset Formula $P$
+\end_inset
+
+ is 
+\begin_inset Formula $\frac{1}{cos(t)}$
+\end_inset
+
+.
+ This bidirectional relationship is exploited in the following sections.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename lm_inversion.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Inversion with Respect to a Circle
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Parametrization using Transcendental Functions
+\end_layout
+
+\begin_layout Standard
+Points 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ lie on unit circles centred at 
+\begin_inset Formula $C_{U}=(0,-\frac{1}{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{V}=(0,\frac{1}{2})$
+\end_inset
+
+ respectively as shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:2"
+
+\end_inset
+
+.
+ 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ correspond to points 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+U\left(t\right)=\left[\sin\left(t\right),-\frac{1}{2}-\cos\left(t\right),0\right]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The triangle 
+\begin_inset Formula $T'UV$
+\end_inset
+
+ is formed by the joining line 
+\begin_inset Formula $UV$
+\end_inset
+
+ and the intersection point 
+\begin_inset Formula $T'$
+\end_inset
+
+ of the tangent lines through 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Point 
+\begin_inset Formula $T'$
+\end_inset
+
+ is also the inverse of point 
+\begin_inset Formula $T_{U}=(0,-\frac{1}{2}-\cos\left(t\right))$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+By inversion with respect to the circle, the distance 
+\begin_inset Formula $C_{U}T'$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+|C_{U}T'|=\frac{1}{\cos\left(t\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ds1.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ds2.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distances 
+\begin_inset Formula $|C_{U}T'|$
+\end_inset
+
+and 
+\begin_inset Formula $|T'C_{V}|$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For simplicity, the circle centred at 
+\begin_inset Formula $C_{V}$
+\end_inset
+
+ is rotated from yz into the xy plane.
+ Since the circle centres are unit distance apart, the length 
+\begin_inset Formula $T'C_{V}$
+\end_inset
+
+ is therefore
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+|T'C_{V}|=1+\frac{1}{\cos\left(t\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula $T_{V}$
+\end_inset
+
+ is the inverse of 
+\begin_inset Formula $T'$
+\end_inset
+
+ with respect to the upper circle, making the displacement along the y axis
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+|C_{V}T_{V}|=\frac{1}{1+\frac{1}{\cos\left(t\right)}}=\frac{\cos\left(t\right)}{1+\cos\left(t\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+By Pythagoras, the squared distance of 
+\begin_inset Formula $V$
+\end_inset
+
+ to the y axis is 
+\begin_inset Formula 
+\[
+|VT_{V}|^{2}=1-\frac{\cos^{2}\left(t\right)}{\left(1+\cos\left(t\right)\right)^{2}}=\frac{1+2\cos\left(t\right)}{\left(1+\cos\left(t\right)\right)^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Rotating back into the yz plane it follows that V has the parametrization
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V\left(t\right)=\left[0,\frac{1}{2}-\frac{\cos\left(t\right)}{1+\cos\left(t\right)},\pm\frac{\sqrt{1+2\cos\left(t\right)}}{1+\cos\left(t\right)}\right]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Alternative Rational Parametrization
+\end_layout
+
+\begin_layout Standard
+The approach taken for an alternative parametrization is identical to the
+ one already given.
+ This time as shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:3"
+
+\end_inset
+
+, the rational parametrization of the circle is used as a starting point
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+U\left(t\right)=\left[\frac{2t}{1+t^{2}},-\frac{1}{2}-\frac{1-t^{2}}{1+t^{2}},0\right]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename lm1.png
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename lm2.png
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Alternative Rational Parametrization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+It follows that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V\left(t\right)=\left[0,\pm\frac{1}{2}\sqrt{\left(3-t^{2}\right)\left(1+t^{2}\right)},\frac{t^{2}}{2}\right]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Comparison of the Parametrizations
+\end_layout
+
+\begin_layout Standard
+When rendered in a 3D graphics program, both parametrizations give pleasing
+ results.
+ The first method uses 
+\begin_inset Formula $t\in\left[-\frac{2}{3}\pi,\frac{2}{3}\pi\right]$
+\end_inset
+
+while the second uses 
+\begin_inset Formula $t\in\left[-\sqrt{3},\sqrt{3}\right]$
+\end_inset
+
+.
+ There is no escape from irrational constants in the second method despite
+ its rational intentions.
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:4"
+
+\end_inset
+
+ shows how both parametrizations project the circular arc onto the plane
+ despite their different trajectories.
+ The vertical axis contains the parameter 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ The slopes of the curves are roughly equivalent over most of their range
+ - particularly at the turning point.
+ For this reason, digital realisations of the surface using either parametrisati
+on have much the same subjective quality.
+\end_layout
+
+\begin_layout Standard
+Good luck to anyone proving that 
+\begin_inset Formula $|UV|=\sqrt{3}$
+\end_inset
+
+ using my equations.
+ I don't think it will be pretty.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Oloid-arc-param.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Functions over full range of parameter 
+\begin_inset Formula $t$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:4"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+C++ Source Code using VTK
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align left
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/logicmonkey/surfaces/blob/master/Oloid/Oloid.cxx
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align left
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/logicmonkey/surfaces/blob/master/rOloid/rOloid.cxx
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "1"
+key "key-1"
+
+\end_inset
+
+Dirnbock H., Stachel H.
+ The Development of the Oloid.
+ Journal for Geometry and Graphics Volume 1 (1997), No.
+ 2, 105–118
+\end_layout
+
+\end_body
+\end_document
