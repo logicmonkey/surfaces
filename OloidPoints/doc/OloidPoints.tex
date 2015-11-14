@@ -46,7 +46,8 @@ Fauxloids.
 
 A derivation is given for the equations provided in \cite{key-1}.
 A further alternative parametrization with a rational goal is also
-shown.
+shown and when rendered with a low polygon count approximates the
+ideal more accurately.
 
 
 \section*{Inversion with Respect to a Circle}
@@ -65,7 +66,7 @@ exploited in the following sections.
 \includegraphics[scale=0.5]{lm_inversion}
 \par\end{centering}
 
-\centering{}\caption{Inversion with Respect to a Circle\label{fig:1}}
+\centering{}\caption{Inversion with respect to a circle\label{fig:1}}
 \end{figure}
 
 \par\end{center}
@@ -137,7 +138,7 @@ V\left(t\right)=\left[0,\frac{1}{2}-\frac{\cos\left(t\right)}{1+\cos\left(t\righ
 
 
 
-\section*{Alternative Rational Parametrization}
+\section*{Alternative Quasi-Rational Parametrization}
 
 The approach taken for an alternative parametrization is identical
 to the one already given. This time as shown in figure \ref{fig:3},
@@ -151,14 +152,10 @@ U\left(t\right)=\left[\frac{2t}{1+t^{2}},-\frac{1}{2}-\frac{1-t^{2}}{1+t^{2}},0\
 \noindent \begin{center}
 \begin{figure}[H]
 \begin{centering}
-\subfloat[]{\noindent \begin{centering}
-\includegraphics[scale=0.7]{lm1}
+\subfloat[]{\noindent \centering{}\includegraphics[scale=0.7]{lm1}}\subfloat[]{\noindent \centering{}\includegraphics[scale=0.7]{lm2}}
 \par\end{centering}
 
-}\subfloat[]{\noindent \centering{}\includegraphics[scale=0.7]{lm2}}
-\par\end{centering}
-
-\centering{}\caption{Alternative Rational Parametrization\label{fig:3}}
+\centering{}\caption{Alternative rational parametrization\label{fig:3}}
 \end{figure}
 
 \par\end{center}
@@ -179,16 +176,29 @@ the second uses $t\in\left[-\sqrt{3},\sqrt{3}\right]$. There is no
 escape from irrational constants in the second method despite its
 rational intentions.
 
-Figure \ref{fig:4} shows how both parametrizations project the circular
-arc onto the plane despite their different trajectories. The vertical
-axis contains the parameter $t$. The slopes of the curves are roughly
-equivalent over most of their range - particularly at the turning
-point. For this reason, digital realisations of the surface using
-either parametrisation have much the same subjective quality.
+\noindent \begin{center}
+\begin{figure}[H]
+\noindent \subfloat[Original\label{fig:4a}]{\noindent \begin{centering}
+\includegraphics[scale=0.5]{Oloid28}
+\par\end{centering}
 
-The property $|UV|=\sqrt{3}$ is readily proven using equations \ref{eq:1}
-and \ref{eq:2} as in \cite{key-1}. Demonstrating the same with equations
-\ref{eq:3} and \ref{eq:4} has so far eluded the author.
+\noindent \centering{}}\subfloat[Quasi-rational\label{fig:4b}]{\noindent \begin{centering}
+\includegraphics[scale=0.5]{rOloid28}
+\par\end{centering}
+
+\noindent \centering{}}\caption{Comparison of Oloids using 28 sub-divisions per circular arc\label{fig:4}}
+\end{figure}
+
+\par\end{center}
+
+Figures \ref{fig:4a} and \ref{fig:4b} show the Oloid rendered with
+a low polygon count. The quasi-rational parametrization is appreciably
+closer to the ideal. Figure \ref{fig:5} shows how both parametrizations
+project the circular arc traced by $V$ on the plane and their different
+trajectories. The vertical axis tracks the parameter $t$. The steeper
+slope of the original parametrization indicates a less uniform distribution
+of sample points than the quasi-rational solution. This is reflected
+in the relative surface quality at low polygon counts.
 
 \noindent \begin{center}
 \begin{figure}[H]
@@ -196,12 +206,14 @@ and \ref{eq:2} as in \cite{key-1}. Demonstrating the same with equations
 \includegraphics{Oloid-arc-param}
 \par\end{centering}
 
-\centering{}\caption{Functions over full range of parameter $t$\label{fig:4}}
+\centering{}\caption{Functions over full range of parameter $t$\label{fig:5}}
 \end{figure}
 
 \par\end{center}
 
-\pagebreak{}
+The property $|UV|=\sqrt{3}$ is readily proven using equations \ref{eq:1}
+and \ref{eq:2} as in \cite{key-1}. Demonstrating the same with equations
+\ref{eq:3} and \ref{eq:4} has so far eluded the author.
 
 
 \section*{C++ Source Code using VTK}

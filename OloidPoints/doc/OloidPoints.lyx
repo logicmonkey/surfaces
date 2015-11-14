@@ -136,7 +136,9 @@ key "key-1"
 \end_inset
 
 .
- A further alternative parametrization with a rational goal is also shown.
+ A further alternative parametrization with a rational goal is also shown
+ and when rendered with a low polygon count approximates the ideal more
+ accurately.
 \end_layout
 
 \begin_layout Section*
@@ -232,7 +234,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Inversion with Respect to a Circle
+Inversion with respect to a circle
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:1"
@@ -551,7 +553,7 @@ V\left(t\right)=\left[0,\frac{1}{2}-\frac{\cos\left(t\right)}{1+\cos\left(t\righ
 \end_layout
 
 \begin_layout Section*
-Alternative Rational Parametrization
+Alternative Quasi-Rational Parametrization
 \end_layout
 
 \begin_layout Standard
@@ -615,10 +617,6 @@ status open
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -658,7 +656,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Alternative Rational Parametrization
+Alternative rational parametrization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:3"
@@ -715,24 +713,207 @@ while the second uses
 \end_layout
 
 \begin_layout Standard
-Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:4"
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Oloid28.png
+	scale 50
 
 \end_inset
 
- shows how both parametrizations project the circular arc onto the plane
- despite their different trajectories.
- The vertical axis contains the parameter 
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Original
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:4a"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename rOloid28.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Quasi-rational
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:4b"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of Oloids using 28 sub-divisions per circular arc
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:4"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:4a"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:4b"
+
+\end_inset
+
+ show the Oloid rendered with a low polygon count.
+ The quasi-rational parametrization is appreciably closer to the ideal.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:5"
+
+\end_inset
+
+ shows how both parametrizations project the circular arc traced by 
+\begin_inset Formula $V$
+\end_inset
+
+ on the plane and their different trajectories.
+ The vertical axis tracks the parameter 
 \begin_inset Formula $t$
 \end_inset
 
 .
- The slopes of the curves are roughly equivalent over most of their range
- - particularly at the turning point.
- For this reason, digital realisations of the surface using either parametrisati
-on have much the same subjective quality.
+ The steeper slope of the original parametrization indicates a less uniform
+ distribution of sample points than the quasi-rational solution.
+ This is reflected in the relative surface quality at low polygon counts.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Oloid-arc-param.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Functions over full range of parameter 
+\begin_inset Formula $t$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:5"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -777,62 +958,6 @@ reference "eq:4"
 \end_inset
 
  has so far eluded the author.
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align center
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Oloid-arc-param.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Functions over full range of parameter 
-\begin_inset Formula $t$
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:4"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section*
