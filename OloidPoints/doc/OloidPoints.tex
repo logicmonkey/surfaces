@@ -1,13 +1,18 @@
 %% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[english]{article}
+\documentclass[oneside,english]{amsart}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{float}
 \usepackage{url}
+\usepackage{amsthm}
 \usepackage{graphicx}
 
 \makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
 \@ifundefined{showcaptionsetup}{}{%
  \PassOptionsToPackage{caption=false}{subfig}}
 \usepackage{subfig}

@@ -69,7 +69,7 @@
 #include <vtkTriangleFilter.h>            // needed for STL output
 #include <vtkSTLWriter.h>                 // physical realisation
 
-#define UMAX 256
+#define UMAX 28
 
 #define RADIUS 25.4                       // imperious :)
 

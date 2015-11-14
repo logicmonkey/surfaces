@@ -19,20 +19,20 @@
 // -----------------------------------------------------------------------
 //
 // Oloid - a ruled surface based on two unit circles.
-//   One circle is in the xy plane and centred at (0,0,0) the other
-//   is centred at (1,0,0) in the xz plane. The ruled surface is swept
+//   One circle is in the xy plane and centred at (0,-0.5,0) the other
+//   is centred at (0,0.5,0) in the xz plane. The ruled surface is swept
 //   out by a straight line from one circle to the other, over the arc
 //   with range -2*pi/3 to 2*pi/3. I refer to the circles as U and V.
 //
 //   The two circles are parametrized differently. U has the usual one
-//   (cos t, sin t) with constant angular velocity. V has a variable
-//   angular velocity parametrization in the xz plane:
+//   (sin t, cos t) with constant angular velocity. V has a variable
+//   angular velocity parametrization in the yz plane:
 //
-//    .                                   .
-//   |   cos t            sqrt(1 + 2cos t) |
-//   | --------- , 0, +/- ---------------- |
-//   | 1 + cos t              1 + cos t    |
-//    .                                   .
+//    .                                       .
+//   |    1     cos t         sqrt(1 + 2cos t) |
+//   | 0, - - --------- , +/- ---------------- |
+//   |    2   1 + cos t           1 + cos t    |
+//    .                                       .
 //
 //   This is real over a restricted range and has obvious singularities.
 //
@@ -75,7 +75,7 @@
 
 #define PI 4.0*atan(1)                    // pi for this computer
 
-#define UMAX 256
+#define UMAX 28
 
 #define RADIUS 25.4                       // imperious :)
 
@@ -101,11 +101,11 @@ int main(int, char *[]) {
 
   for( vtkIdType i=UMIN; i<=UMAX; i++ ) {
 
-    p[0] = RADIUS * cos(t);
-    p[1] = RADIUS * sin(t);
+    p[0] = RADIUS * sin(t);
+    p[1] = RADIUS * (-1.0/2.0 - cos(t));
 
     // reflect in x
-    points->InsertNextPoint( -p[0],  p[1], 0 );
+    points->InsertNextPoint( p[0],  p[1], 0 );
     std::cout << i << " U " << p[0] << " : " << p[1] << std::endl;
 
     t += dt;
@@ -115,28 +115,28 @@ int main(int, char *[]) {
 
   for( vtkIdType i=VMIN; i<=VMID-1; i++ ) {
 
-    p[0] = RADIUS * (1.0 - cos(t)/(1.0+cos(t)));
+    p[0] = RADIUS * (1.0/2.0 - cos(t)/(1.0+cos(t)));
     p[1] = RADIUS * (sqrt(1.0+2.0*cos(t))/(1.0+cos(t)));
 
-    points->InsertNextPoint( p[0], 0,  p[1] );
+    points->InsertNextPoint( 0, p[0], p[1] );
     std::cout << i << " V " << p[0] << " : " << p[1] << std::endl;
 
     t += dt;
   }
 
   // avoid divide by zero at the midpoint of V
-  points->InsertNextPoint( 2*RADIUS, 0, 0 );
+  points->InsertNextPoint( 0, RADIUS*1.5, 0 );
   std::cout << VMID << " V " << p[0] << " : " << p[1] << std::endl;
 
   t = 2.0/3.0 * PI - dt;
 
   for( vtkIdType i=VMID+1; i<=VMAX; i++ ) {
 
-    p[0] = RADIUS * (1.0 - cos(t)/(1.0+cos(t)));
+    p[0] = RADIUS * (1.0/2.0 - cos(t)/(1.0+cos(t)));
     p[1] = RADIUS * (sqrt(1.0+2.0*cos(t))/(1.0+cos(t)));
 
-    points->InsertNextPoint( p[0], 0, -p[1] );
-    std::cout << i << " V " << p[0] << " : " << p[1] << std::endl;
+    points->InsertNextPoint( 0, p[0], -p[1] );
+    std::cout << i << " V " << p[0] << " : " << -p[1] << std::endl;
 
     t -= dt;
   }
