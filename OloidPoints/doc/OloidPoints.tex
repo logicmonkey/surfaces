@@ -168,7 +168,7 @@ U\left(t\right)=\left[\frac{2t}{1+t^{2}},-\frac{1}{2}-\frac{1-t^{2}}{1+t^{2}},0\
 \noindent It follows that
 
 \begin{equation}
-V\left(t\right)=\left[0,\pm\frac{1}{2}\sqrt{\left(3-t^{2}\right)\left(1+t^{2}\right)},\frac{t^{2}}{2}\right]\label{eq:4}
+V\left(t\right)=\left[0,\frac{t^{2}}{2},\pm\frac{1}{2}\sqrt{\left(3-t^{2}\right)\left(1+t^{2}\right)}\right]\label{eq:4}
 \end{equation}
 
 
@@ -216,9 +216,14 @@ in the relative surface quality at low polygon counts.
 
 \par\end{center}
 
-The property $|UV|=\sqrt{3}$ is readily proven using equations \ref{eq:1}
-and \ref{eq:2} as in \cite{key-1}. Demonstrating the same with equations
-\ref{eq:3} and \ref{eq:4} has so far eluded the author.
+The Oloid property $|UV|=\sqrt{3}$ is readily proven using equations
+\ref{eq:1} and \ref{eq:2} as in \cite{key-1}. Similarly, using
+equations \ref{eq:3} and \ref{eq:4}
+
+\[
+|UV|^{2}=\left(\frac{2t}{1+t^{2}}\right)^{2}+\left(\frac{t^{2}}{2}-\left(-\frac{1}{2}-\frac{1-t^{2}}{1+t^{2}}\right)\right)^{2}+\left(\frac{\sqrt{(3-t^{2})(1+t^{2})}}{2}\right)^{2}=3
+\]
+
 
 
 \section*{C++ Source Code using VTK}
