@@ -69,7 +69,7 @@
 #include <vtkTriangleFilter.h>            // needed for STL output
 #include <vtkSTLWriter.h>                 // physical realisation
 
-#define UMAX 28
+#define UMAX 256
 
 #define RADIUS 25.4                       // imperious :)
 
@@ -196,7 +196,7 @@ int main(int, char *[]) {
 
   vtkSmartPointer<vtkSTLWriter>
     stlWriter = vtkSmartPointer<vtkSTLWriter>::New();
-  stlWriter->SetFileName("Oloid.stl");
+  stlWriter->SetFileName("rOloid.stl");
   stlWriter->SetInputConnection(tris->GetOutputPort());
   stlWriter->Write();
 
