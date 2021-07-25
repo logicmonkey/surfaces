@@ -65,6 +65,7 @@
 #include <vtkAppendPolyData.h>
 #include <vtkPolyDataMapper.h>
 
+#include "vtkNamedColors.h"
 #include <vtkCamera.h>                    // the visualisation
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
@@ -75,7 +76,7 @@
 
 #define PI 4.0*atan(1)                    // pi for this computer
 
-#define UMAX 28
+#define UMAX 1024
 
 #define RADIUS 25.4                       // imperious :)
 
@@ -91,6 +92,8 @@ int main(int, char *[]) {
 
   vtkSmartPointer<vtkPoints>
     points = vtkSmartPointer<vtkPoints>::New();
+
+  vtkNew<vtkNamedColors> colors;
 
   // GEOMETRY PHASE (create point set)
 
@@ -216,8 +219,11 @@ int main(int, char *[]) {
     actor = vtkSmartPointer<vtkActor>::New();
   actor->SetMapper(mapper);                            // mapper to actor
 
-  actor->GetProperty()->SetColor(0.89, 0.81, 0.34);    // goldish
+  //actor->GetProperty()->SetColor(0.89, 0.81, 0.34);    // goldish
   //actor->GetProperty()->SetSpecular(1.0);
+  actor->GetProperty()->SetDiffuseColor(colors->GetColor3d("SeaGreen").GetData());
+  actor->GetProperty()->SetSpecular(1.0);
+  actor->GetProperty()->SetSpecularPower(100);
 
   // Add the actors to the renderer, set the background and size
   vtkSmartPointer<vtkRenderer>
